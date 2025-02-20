@@ -43,7 +43,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-    return await Geolocator.getCurrentPosition();
+    Position position = await Geolocator.getCurrentPosition();
+    return position;
+  }
+
+  void _getLocation() async{
+    Position position = await Geolocator.getCurrentPosition();
+    print(position);
   }
 
   @override
@@ -52,7 +58,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            _determinePosition();
+            _getLocation();
           },
           child: Text('Get Location'),
         ),
