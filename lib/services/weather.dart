@@ -1,4 +1,30 @@
+import 'package:mobile/services/networking.dart';
+import '../services/location.dart';
+
+const apiKey = 'b417688ee089cffa301759fd89da06e7';
+const linkUrl = 'https://api.openweathermap.org/data/2.5/weather';
+
 class WeatherModel {
+  double? longitude;
+  double? latitude;
+
+  Future<dynamic> getLocationWeather() async {
+    Location location = Location();
+    // use to have the coordination
+    await location.determinePosition();
+
+    longitude = location.longtitude;
+    latitude = location.latitude;
+
+    //base on the xy, fetch the data
+    Networking network = Networking(
+        '$linkUrl?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric');
+
+    //use a variable to transfer to another screen
+    var weatherData = await network.getData();
+    return weatherData;
+  }
+
   String getWeatherIcon(int condition) {
     if (condition < 300) {
       return '🌩';
