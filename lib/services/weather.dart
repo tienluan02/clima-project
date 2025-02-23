@@ -8,6 +8,13 @@ class WeatherModel {
   double? longitude;
   double? latitude;
 
+  Future<dynamic> getCityWeather(String cityName) async {
+    var url = '$linkUrl?q=London&appid=$apiKey';
+    Networking network =  Networking(url);
+    var weatherData = await network.getData();
+    return weatherData;
+  }
+
   Future<dynamic> getLocationWeather() async {
     Location location = Location();
     // use to have the coordination

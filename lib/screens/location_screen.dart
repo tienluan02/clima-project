@@ -78,6 +78,9 @@ class _LocationScreenState extends State<LocationScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const CityScreen()));
+                      print(newCityName);
+                        var weatherData = await weather.getCityWeather(newCityName);
+                        updateUI(weatherData);
                     },
                     child: Icon(
                       Icons.location_city,
